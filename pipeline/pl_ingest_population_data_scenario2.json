@@ -87,7 +87,8 @@
 							"userProperties": [],
 							"typeProperties": {
 								"method": "POST",
-								"url": "https://unknownm"
+								"url": "https://unknownm",
+								"body": "dummy"
 							}
 						}
 					],
