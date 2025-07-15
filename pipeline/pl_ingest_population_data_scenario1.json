@@ -1,5 +1,5 @@
 {
-	"name": "pl_ingest_population_data_checkiffileexists",
+	"name": "pl_ingest_population_data_scenario1",
 	"properties": {
 		"activities": [
 			{
