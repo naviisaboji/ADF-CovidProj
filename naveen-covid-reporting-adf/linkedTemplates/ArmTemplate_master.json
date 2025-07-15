@@ -19,6 +19,10 @@
 			"type": "string",
 			"defaultValue": "https://naveencovidreportingdl.dfs.core.windows.net/"
 		},
+		"tr_ingest_population_data_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/b86476fa-602f-4fed-b864-10d030f5525e/resourceGroups/covid-reporting-rg/providers/Microsoft.Storage/storageAccounts/naveencovidreportingsa"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -54,6 +58,9 @@
 					},
 					"ls_adls_covidreportingdl_properties_typeProperties_url": {
 						"value": "[parameters('ls_adls_covidreportingdl_properties_typeProperties_url')]"
+					},
+					"tr_ingest_population_data_properties_typeProperties_scope": {
+						"value": "[parameters('tr_ingest_population_data_properties_typeProperties_scope')]"
 					}
 				}
 			},
