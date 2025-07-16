@@ -16,6 +16,9 @@
 		},
 		"tr_ingest_population_data_properties_typeProperties_scope": {
 			"value": "/subscriptions/b86476fa-602f-4fed-b864-10d030f5525e/resourceGroups/covid-reporting-rg/providers/Microsoft.Storage/storageAccounts/naveencovidreportingsa"
+		},
+		"ls_http_opendata_europa_eu_properties_typeProperties_url": {
+			"value": "https://raw.githubusercontent.com"
 		}
 	}
 }
