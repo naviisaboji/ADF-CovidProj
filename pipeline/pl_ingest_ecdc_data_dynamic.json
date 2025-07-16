@@ -62,9 +62,9 @@
 							},
 							"userProperties": [],
 							"typeProperties": {
-								"variableName": "setRelativeURL",
+								"variableName": "sourceRelativeURL",
 								"value": {
-									"value": "@activity('Lookup1').output",
+									"value": "@item()",
 									"type": "Expression"
 								}
 							}
@@ -74,7 +74,7 @@
 			}
 		],
 		"variables": {
-			"setRelativeURL": {
+			"sourceRelativeURL": {
 				"type": "String"
 			}
 		},
