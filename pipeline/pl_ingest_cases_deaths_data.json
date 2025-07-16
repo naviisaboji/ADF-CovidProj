@@ -54,6 +54,10 @@
 							"relativepath": {
 								"value": "@variables('srcrelativepath')",
 								"type": "Expression"
+							},
+							"baseURL": {
+								"value": "@variables('sourceBaseURL')",
+								"type": "Expression"
 							}
 						}
 					}
@@ -80,6 +84,9 @@
 			"srcfilename": {
 				"type": "String",
 				"defaultValue": "cases_deaths.csv"
+			},
+			"sourceBaseURL": {
+				"type": "String"
 			}
 		},
 		"annotations": []
