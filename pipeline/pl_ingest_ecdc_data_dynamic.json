@@ -53,7 +53,7 @@
 					"isSequential": true,
 					"activities": [
 						{
-							"name": "Copy data1",
+							"name": "Copy ecdc data to Data lake",
 							"type": "Copy",
 							"dependsOn": [],
 							"policy": {
