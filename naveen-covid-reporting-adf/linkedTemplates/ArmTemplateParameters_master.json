@@ -15,7 +15,7 @@
 			"value": "https://naveencovidreportingdl.dfs.core.windows.net/"
 		},
 		"ls_http_opendata_europa_eu_properties_typeProperties_url": {
-			"value": "https://raw.githubusercontent.com"
+			"value": "@{linkedService().sourceBaseURL}"
 		},
 		"tr_ingest_hospital_admissions_data_properties_pl_ingest_ecdc_data_parameters_srcrelativepath": {
 			"value": "cloudboxacademy/covid19/blob/main/ecdc_data/hospital_admissions.csv"
