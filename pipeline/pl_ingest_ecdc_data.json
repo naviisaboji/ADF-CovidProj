@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy data1",
+				"name": "Copy ecdc data",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -52,7 +52,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"relativepath": {
-								"value": "@variables('srcrelativepath')",
+								"value": "@pipeline().parameters.srcrelativepath",
 								"type": "Expression"
 							}
 						}
@@ -64,7 +64,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"filename": {
-								"value": "@variables('srcfilename')",
+								"value": "@pipeline().parameters.tgtfilename",
 								"type": "Expression"
 							}
 						}
@@ -72,14 +72,12 @@
 				]
 			}
 		],
-		"variables": {
+		"parameters": {
 			"srcrelativepath": {
-				"type": "String",
-				"defaultValue": "cloudboxacademy/covid19/main/ecdc_data/cases_deaths.csv"
+				"type": "string"
 			},
-			"srcfilename": {
-				"type": "String",
-				"defaultValue": "cases_deaths.csv"
+			"tgtfilename": {
+				"type": "string"
 			}
 		},
 		"annotations": []
