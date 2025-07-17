@@ -73,6 +73,24 @@
 					},
 					"ls_http_opendata_europa_eu_properties_typeProperties_url": {
 						"value": "[parameters('ls_http_opendata_europa_eu_properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "naveen-covid-reporting-adf_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
 					},
 					"tr_ingest_hospital_admissions_data_properties_pl_ingest_ecdc_data_parameters_srcrelativepath": {
 						"value": "[parameters('tr_ingest_hospital_admissions_data_properties_pl_ingest_ecdc_data_parameters_srcrelativepath')]"
@@ -85,7 +103,9 @@
 					}
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'naveen-covid-reporting-adf_ArmTemplate_0')]"
+			]
 		}
 	]
 }
