@@ -13,10 +13,12 @@
 		},
 		"parameters": {
 			"relativepath": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "cloudboxacademy/covid19/refs/heads/main/ecdc_data/"
 			},
 			"baseURL": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "https://raw.githubusercontent.com/"
 			}
 		},
 		"annotations": [],

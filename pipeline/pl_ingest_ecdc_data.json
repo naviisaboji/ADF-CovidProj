@@ -52,11 +52,11 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"relativepath": {
-								"value": "@pipeline().parameters.srcrelativepath",
+								"value": "@pipeline().parameters.baseurl",
 								"type": "Expression"
 							},
 							"baseURL": {
-								"value": "@pipeline().parameters.sourceBaseURL",
+								"value": "@pipeline().parameters.relativepath",
 								"type": "Expression"
 							}
 						}
@@ -77,13 +77,13 @@
 			}
 		],
 		"parameters": {
-			"srcrelativepath": {
+			"baseurl": {
+				"type": "string"
+			},
+			"relativepath": {
 				"type": "string"
 			},
 			"tgtfilename": {
-				"type": "string"
-			},
-			"sourceBaseURL": {
 				"type": "string"
 			}
 		},
