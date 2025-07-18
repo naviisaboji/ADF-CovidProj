@@ -7,10 +7,6 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "naveen-covid-reporting-adf"
 		},
-		"tr_ingest_hospital_admissions_data_properties_pl_ingest_ecdc_data_parameters_srcrelativepath": {
-			"type": "string",
-			"defaultValue": "cloudboxacademy/covid19/blob/main/ecdc_data/hospital_admissions.csv"
-		},
 		"tr_ingest_hospital_admissions_data_properties_pl_ingest_ecdc_data_parameters_tgtfilename": {
 			"type": "string",
 			"defaultValue": "hospital_admissions.csv"
@@ -138,11 +134,14 @@
 						"     skipDuplicateMapOutputs: true) ~> finalselect",
 						"finalselect sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
+						"     partitionFileNames:['cases_and_deaths.csv'],",
+						"     truncate: true,",
 						"     umask: 0022,",
 						"     preCommands: [],",
 						"     postCommands: [],",
 						"     skipDuplicateMapInputs: true,",
-						"     skipDuplicateMapOutputs: true) ~> casesDeathsSink"
+						"     skipDuplicateMapOutputs: true,",
+						"     partitionBy('hash', 1)) ~> casesDeathsSink"
 					]
 				}
 			},
@@ -246,7 +245,6 @@
 							"type": "PipelineReference"
 						},
 						"parameters": {
-							"srcrelativepath": "[parameters('tr_ingest_hospital_admissions_data_properties_pl_ingest_ecdc_data_parameters_srcrelativepath')]",
 							"tgtfilename": "[parameters('tr_ingest_hospital_admissions_data_properties_pl_ingest_ecdc_data_parameters_tgtfilename')]"
 						}
 					}

@@ -296,10 +296,12 @@
 				},
 				"parameters": {
 					"relativepath": {
-						"type": "string"
+						"type": "string",
+						"defaultValue": "cloudboxacademy/covid19/refs/heads/main/ecdc_data/"
 					},
 					"baseURL": {
-						"type": "string"
+						"type": "string",
+						"defaultValue": "https://raw.githubusercontent.com/"
 					}
 				},
 				"annotations": [],
@@ -634,11 +636,11 @@
 								"type": "DatasetReference",
 								"parameters": {
 									"relativepath": {
-										"value": "@pipeline().parameters.srcrelativepath",
+										"value": "@pipeline().parameters.baseurl",
 										"type": "Expression"
 									},
 									"baseURL": {
-										"value": "@pipeline().parameters.sourceBaseURL",
+										"value": "@pipeline().parameters.relativepath",
 										"type": "Expression"
 									}
 								}
@@ -662,13 +664,13 @@
 					"elapsedTimeMetric": {}
 				},
 				"parameters": {
-					"srcrelativepath": {
+					"baseurl": {
+						"type": "string"
+					},
+					"relativepath": {
 						"type": "string"
 					},
 					"tgtfilename": {
-						"type": "string"
-					},
-					"sourceBaseURL": {
 						"type": "string"
 					}
 				},

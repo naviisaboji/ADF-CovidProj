@@ -23,10 +23,6 @@
 			"type": "string",
 			"defaultValue": "@{linkedService().sourceBaseURL}"
 		},
-		"tr_ingest_hospital_admissions_data_properties_pl_ingest_ecdc_data_parameters_srcrelativepath": {
-			"type": "string",
-			"defaultValue": "cloudboxacademy/covid19/blob/main/ecdc_data/hospital_admissions.csv"
-		},
 		"tr_ingest_hospital_admissions_data_properties_pl_ingest_ecdc_data_parameters_tgtfilename": {
 			"type": "string",
 			"defaultValue": "hospital_admissions.csv"
@@ -199,11 +195,11 @@
 								"type": "DatasetReference",
 								"parameters": {
 									"relativepath": {
-										"value": "@pipeline().parameters.srcrelativepath",
+										"value": "@pipeline().parameters.baseurl",
 										"type": "Expression"
 									},
 									"baseURL": {
-										"value": "@pipeline().parameters.sourceBaseURL",
+										"value": "@pipeline().parameters.relativepath",
 										"type": "Expression"
 									}
 								}
@@ -227,13 +223,13 @@
 					"elapsedTimeMetric": {}
 				},
 				"parameters": {
-					"srcrelativepath": {
+					"baseurl": {
+						"type": "string"
+					},
+					"relativepath": {
 						"type": "string"
 					},
 					"tgtfilename": {
-						"type": "string"
-					},
-					"sourceBaseURL": {
 						"type": "string"
 					}
 				},
@@ -1226,10 +1222,12 @@
 				},
 				"parameters": {
 					"relativepath": {
-						"type": "string"
+						"type": "string",
+						"defaultValue": "cloudboxacademy/covid19/refs/heads/main/ecdc_data/"
 					},
 					"baseURL": {
-						"type": "string"
+						"type": "string",
+						"defaultValue": "https://raw.githubusercontent.com/"
 					}
 				},
 				"annotations": [],
@@ -1508,7 +1506,6 @@
 							"type": "PipelineReference"
 						},
 						"parameters": {
-							"srcrelativepath": "[parameters('tr_ingest_hospital_admissions_data_properties_pl_ingest_ecdc_data_parameters_srcrelativepath')]",
 							"tgtfilename": "[parameters('tr_ingest_hospital_admissions_data_properties_pl_ingest_ecdc_data_parameters_tgtfilename')]"
 						}
 					}
@@ -1680,11 +1677,14 @@
 						"     skipDuplicateMapOutputs: true) ~> finalselect",
 						"finalselect sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
+						"     partitionFileNames:['cases_and_deaths.csv'],",
+						"     truncate: true,",
 						"     umask: 0022,",
 						"     preCommands: [],",
 						"     postCommands: [],",
 						"     skipDuplicateMapInputs: true,",
-						"     skipDuplicateMapOutputs: true) ~> casesDeathsSink"
+						"     skipDuplicateMapOutputs: true,",
+						"     partitionBy('hash', 1)) ~> casesDeathsSink"
 					]
 				}
 			},
