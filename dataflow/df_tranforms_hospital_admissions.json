@@ -10,23 +10,79 @@
 						"type": "DatasetReference"
 					},
 					"name": "SrcHospitalAdmissions"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_country_lookup",
+						"type": "DatasetReference"
+					},
+					"name": "countrySource"
 				}
 			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "selectRequiredFields"
+				},
+				{
+					"name": "lookup1"
+				},
+				{
+					"name": "selectRequiredFields2"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
 				"          country as string,",
 				"          indicator as string,",
-				"          date as string,",
+				"          date as date,",
 				"          year_week as string,",
-				"          value as string,",
+				"          value as double,",
 				"          source as string,",
 				"          url as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> SrcHospitalAdmissions"
+				"     ignoreNoFilesFound: false) ~> SrcHospitalAdmissions",
+				"source(output(",
+				"          country as string,",
+				"          country_code_2_digit as string,",
+				"          country_code_3_digit as string,",
+				"          continent as string,",
+				"          population as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> countrySource",
+				"SrcHospitalAdmissions select(mapColumn(",
+				"          country,",
+				"          indicator,",
+				"          reported_date = date,",
+				"          reported_year_week = year_week,",
+				"          value,",
+				"          source",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectRequiredFields",
+				"selectRequiredFields, countrySource lookup(selectRequiredFields@country == countrySource@country,",
+				"     multiple: false,",
+				"     pickup: 'any',",
+				"     broadcast: 'auto')~> lookup1",
+				"lookup1 select(mapColumn(",
+				"          country = selectRequiredFields@country,",
+				"          indicator,",
+				"          reported_date,",
+				"          reported_year_week,",
+				"          value,",
+				"          source,",
+				"          country = countrySource@country,",
+				"          country_code_2_digit,",
+				"          country_code_3_digit,",
+				"          continent,",
+				"          population",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectRequiredFields2"
 			]
 		}
 	}
