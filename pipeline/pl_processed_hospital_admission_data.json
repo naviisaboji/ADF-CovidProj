@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Data flow1",
+				"name": "hospital_admissions_data_weekly_daily",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
